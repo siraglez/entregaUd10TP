@@ -1,0 +1,29 @@
+Clase ConversionTemperatura
+Función convertirTemperatura(temperatura, unidad)
+    Si (unidad = "C" y temperatura < -273.15) o (unidad = "F" y temperatura < -459.67) Entonces:
+        Lanzar una excepción con el mensaje "La temperatura está por debajo del cero absoluto."
+    Fin si
+
+    Si unidad = "C" Entonces:
+        Devolver (temperatura * 9/5) + 32
+    Sino Si unidad = "F" Entonces:
+        Devolver (temperatura - 32) * 5/9
+    Sino
+        Lanzar una excepción con el mensaje "La unidad de temperatura no es válida."
+    Fin si
+
+Algoritmo Main
+Imprimir "Introducir la temperatura: "
+Leer temperatura
+Consumir la nueva línea pendiente
+
+Imprimir "Elegir la unidad de temperatura (C/F): "
+Leer unidad
+unidad <- Convertir a mayúsculas(unidad)
+
+Intentar:
+    resultado <- convertirTemperatura(temperatura, unidad)
+    Imprimir temperatura + unidad + " = " + resultado + (Si unidad = "C" Entonces: "ºF" Sino "ºC")
+Capturas excepción IllegalArgumentException como e
+    Imprimir e.getMessage()
+Fin intentar
