@@ -1,0 +1,55 @@
+Clase Libro
+    Función agregarStock(cantidad) Lanzar ExceptionStickDesbordado
+        nuevoStock <- Convertir a largo(stock) + Convertir a largo(cantidad)
+        Si nuevoStock > Integer.MAX_VALUE o nuecoStock < Integer.MIN_VALUE Entonces
+            Lanzar una excepción con el mensaje "El stock del libro excede la capacidad de este sistema."
+        Fin si
+        stock <- stock + cantidad
+
+    Función quitarStock(cantidad) Lanzar ExceptionStickDesbordado
+        nuevoStock <- Convertir a largo(stock) - Convertir a largo(cantidad)
+        Si nuevoStock > Integer.MAX_VALUE o nuevoStock < Integer.MIN_VALUE Entonces
+            Lanzar una excepción con el mensaje "El stock del libro excede la capacidad de este sistema."
+        Fin si
+        Si stock - cantidad < 0 Entonces
+            Lanzar una excepción con el mensaje "No se puede reducir el stock por debajo de cero."
+        Fin si
+        stock <- stock - cantidad
+
+    Función consultarStock()
+        Devolver stock
+
+Clase ControlStockLibreria
+    Función Main()
+        Imprimir "Introducir el ISBN del libro: "
+        isbn <- Leer línea desde el scanner
+        Imprimir "ISBN " + isbn
+
+        Mientras verdadero Hacer
+            Imprimir "¿Qué desea hacer?: añadir, quitar, consultar, salir"
+            accion <- Leer línea desde el scanner
+
+            Intentar
+                Si accion es igual a "añadir" Entonces
+                    Imprimir "Introducir cantidad a añadir: "
+                    cantidad <- Leer entero desde el scanner
+                    Llamar a agregarStock(cantidad) del objeto libro
+                Sino si accion es igual a "quitar" Entonces
+                    Imprimir "Introducir cantidad a quitar: "
+                    cantidad <- Leer entero desde el scanner
+                    Llamar a quitarStock(cantidad) del objeto libro
+                Sino si accion es igual a "consultar" Entonces
+                    Imprimir "Libro con ISBN: " + isbn + " - Stock actual: " + llamar a consultarStock() del objeto libro
+                Sino si accion es igual a "salir" Entonces
+                    Salir del bucle
+                Sino
+                    Imprimir "Acción no reconocida. Por favor, introduzca una opción válida."
+                Fin si
+            Capturar ExceptionStockDesbordado como e
+                Imprimir e.getMessage()
+            Capturar IllegalArgumentException como e
+                Imprimir e.getMessage()
+            Fin intentar
+        Fin mientras
+
+        Cerrar el scanner
