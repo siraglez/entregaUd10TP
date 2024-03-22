@@ -1,0 +1,20 @@
+@startuml
+
+class Libro {
+    - stock: int
+    + Libro()
+    + agregarStock(int cantidad): void
+    + quitarStock(int cantidad): void
+    + consultarStock(): int
+}
+
+class ControlStockLibreria {
+    + main(args: String[]): void
+}
+
+Libro --> "1..1" ExceptionStockDesbordado
+ControlStockLibreria --> "1..1" Libro
+ControlStockLibreria --> Scanner
+Libro ..> Scanner
+
+@enduml
